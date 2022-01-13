@@ -34,12 +34,12 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td><a href="item.html">글 ID</a></td>
-                <td><a href="item.html" >제목</a></td>
-                <td>작성자</td>
-                <td>조회수</td>
-                <td>등록일</td>
+            <tr th:each="board : ${boards}">
+                <td><a href="item.html" th:text="${board.uid}">글 ID</a></td>
+                <td><a href="item.html" th:text="${board.subject}">제목</a></td>
+                <td th:text="${board.name}">작성자</td>
+                <td th:text="${board.viewcnt}">조회수</td>
+                <td th:text="${board.regdate}">등록일</td>
             </tr>
             </tbody>
         </table>
