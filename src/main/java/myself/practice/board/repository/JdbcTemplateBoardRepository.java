@@ -23,7 +23,8 @@ public class JdbcTemplateBoardRepository implements BoardRepository{
 
     @Override
     public Optional<Board> selectOne(String uid) {
-        return Optional.empty();
+        List<Board> result = jdbcTemplate.query("select * from test_write where wr_uid=?", BoardRowMapper(), uid);
+        return result.stream().findAny();
     }
 
     @Override
