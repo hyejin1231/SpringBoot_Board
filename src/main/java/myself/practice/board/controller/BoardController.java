@@ -30,6 +30,7 @@ public class BoardController {
 
     @GetMapping("/{uid}")
     public String board(@PathVariable("uid") String uid, Model model) {
+        boardService.ViewcntUpdate(uid);
         Optional<Board> result = boardService.BoardOne(uid);
         Board board = result.get();
         model.addAttribute("board", board);

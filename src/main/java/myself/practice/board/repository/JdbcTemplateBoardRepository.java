@@ -33,7 +33,7 @@ public class JdbcTemplateBoardRepository implements BoardRepository{
 
     @Override
     public void updateViewCnt(String uid) {
-
+        jdbcTemplate.update("update test_write set wr_viewcnt = wr_viewcnt + 1 where wr_uid = ?", uid);
     }
 
     @Override

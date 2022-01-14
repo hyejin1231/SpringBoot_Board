@@ -22,6 +22,10 @@ public class BoardService {
         return boardRepository.selectOne(uid);
     }
 
+    public void ViewcntUpdate(String uid) {
+        boardRepository.updateViewCnt(uid);
+    }
+
     public void BoardAdd(Board board) {
         boardRepository.insertOne(board);
     }
