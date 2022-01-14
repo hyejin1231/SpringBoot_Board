@@ -36,4 +36,10 @@ public class BoardController {
         log.info("board={}", board);
         return "boards/board";
     }
+
+    @GetMapping("/add")
+    public String addForm(Model model) {
+        model.addAttribute("board", new Board());
+        return "boards/addForm";
+    }
 }
