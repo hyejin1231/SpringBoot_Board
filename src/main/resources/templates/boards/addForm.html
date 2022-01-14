@@ -22,16 +22,21 @@
         <h2 th:text="#{page.addBoard}">상품 등록</h2>
     </div>
 
-    <form action="item.html" th:action method="post">
+    <form action="item.html" th:action th:object="${board}" method="post">
 
         <div>
-            <label for="subject" th:text="#{label.board.subject}">상품명</label>
-            <input type="text" id="subject" class="form-control" placeholder="제목을 입력하세요.">
+            <input type="hidden" id="name" class="form-control"  th:field="*{name}" value="testUser" placeholder="제목을 입력하세요.">
+
+        </div>
+
+        <div>
+            <label for="subject" th:text="#{label.board.subject}">제목</label>
+            <input type="text" id="subject" th:field="*{subject}" class="form-control" placeholder="제목을 입력하세요.">
 
         </div>
         <div>
             <label for="contents" th:text="#{label.board.contents}">내용</label>
-            <textarea cols="150" rows="10" id="contents" class="form-control" placeholder="내용을 입력하세요.">
+            <textarea cols="150" rows="10" id="contents" th:field="*{contents}" class="form-control" placeholder="내용을 입력하세요.">
 
             </textarea>
 

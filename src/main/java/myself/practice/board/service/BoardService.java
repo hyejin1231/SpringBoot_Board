@@ -21,4 +21,12 @@ public class BoardService {
     public Optional<Board> BoardOne(String uid) {
         return boardRepository.selectOne(uid);
     }
+
+    public void BoardAdd(Board board) {
+        boardRepository.insertOne(board);
+    }
+
+    public void BoardDelete(String uid) {
+        boardRepository.deleteOne(uid);
+    }
 }

@@ -6,9 +6,9 @@ import myself.practice.board.domain.board.Board;
 import myself.practice.board.service.BoardService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
@@ -42,4 +42,17 @@ public class BoardController {
         model.addAttribute("board", new Board());
         return "boards/addForm";
     }
+
+    @PostMapping("/add")
+    public String addBoard(@ModelAttribute Board board, RedirectAttributes redirectAttributes) {
+        boardService.BoardAdd(board);
+        return "redirect:/boards";
+    }
+
+    @RequestMapping("/{uid}/delete")
+    public String deleteBoard(@PathVariable String uid) {
+        boardService.BoardDelete(uid);
+        return "redirect:/boards";
+    }
+
 }
