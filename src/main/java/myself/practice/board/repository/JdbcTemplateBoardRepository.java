@@ -53,7 +53,8 @@ public class JdbcTemplateBoardRepository implements BoardRepository{
 
     @Override
     public void updateOne(Board board) {
-
+        jdbcTemplate.update("update test_write set wr_subject=?, wr_content=? where wr_uid =?",
+                board.getSubject(), board.getContents(), board.getUid());
     }
 
     @Override

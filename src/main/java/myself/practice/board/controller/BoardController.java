@@ -56,4 +56,13 @@ public class BoardController {
         return "redirect:/boards";
     }
 
+    @GetMapping("/{uid}/edit")
+    public String editForm(@PathVariable("uid") String uid, Model model) {
+        Optional<Board> result = boardService.BoardOne(uid);
+        Board board = result.get();
+        model.addAttribute("board", board);
+        log.info("board={}", board);
+
+        return "boards/editForm";
+    }
 }

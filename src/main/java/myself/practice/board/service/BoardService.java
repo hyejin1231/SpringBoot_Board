@@ -33,4 +33,8 @@ public class BoardService {
     public void BoardDelete(String uid) {
         boardRepository.deleteOne(uid);
     }
+
+    public void BoardUpdate(Board board) {
+        boardRepository.updateOne(board);
+    }
 }
