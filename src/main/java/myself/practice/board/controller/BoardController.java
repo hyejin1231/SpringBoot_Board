@@ -65,4 +65,10 @@ public class BoardController {
 
         return "boards/editForm";
     }
+
+    @PostMapping("/{uid}/edit")
+    public String edit(@PathVariable String uid, @ModelAttribute Board board) {
+        boardService.BoardUpdate(board);
+        return "redirect:/boards/{uid}";
+    }
 }
