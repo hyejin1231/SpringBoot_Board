@@ -44,6 +44,7 @@ public class BoardController {
         return "boards/addForm";
     }
 
+    // 검증 로직 추가하기
     @PostMapping("/add")
     public String addBoard(@ModelAttribute Board board, RedirectAttributes redirectAttributes) {
         boardService.BoardAdd(board);
@@ -66,6 +67,7 @@ public class BoardController {
         return "boards/editForm";
     }
 
+    // 검증 로직 추가하기
     @PostMapping("/{uid}/edit")
     public String edit(@PathVariable String uid, @ModelAttribute Board board) {
         boardService.BoardUpdate(board);
