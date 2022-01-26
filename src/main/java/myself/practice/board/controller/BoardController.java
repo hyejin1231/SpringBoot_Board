@@ -3,10 +3,13 @@ package myself.practice.board.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import myself.practice.board.domain.board.Board;
+import myself.practice.board.domain.board.BoardSaveForm;
+import myself.practice.board.domain.board.BoardUpdateForm;
 import myself.practice.board.service.BoardService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -46,7 +49,19 @@ public class BoardController {
 
     // 검증 로직 추가하기
     @PostMapping("/add")
-    public String addBoard(@ModelAttribute Board board, RedirectAttributes redirectAttributes) {
+    public String addBoard(@Validated @ModelAttribute("board") BoardSaveForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()) {
+            log.info("errors={}", bindingResult);
+            return "boards/addForm";
+        }
+
+        // 성공 로직
+        Board board = new Board();
+        board.setSubject(form.getSubject());
+        board.setContents(form.getContents());
+        board.setName(form.getName());
+
         boardService.BoardAdd(board);
         return "redirect:/boards";
     }
@@ -69,7 +84,18 @@ public class BoardController {
 
     // 검증 로직 추가하기
     @PostMapping("/{uid}/edit")
-    public String edit(@PathVariable String uid, @ModelAttribute Board board) {
+    public String edit(@PathVariable String uid, @Validated @ModelAttribute("board") BoardUpdateForm form, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            log.info("errors={}", bindingResult);
+            return "boards/editForm";
+        }
+
+        Board board = new Board();
+        board.setSubject(form.getSubject());
+        board.setContents(form.getContents());
+        board.setUid(Integer.parseInt(uid));
+
         boardService.BoardUpdate(board);
         return "redirect:/boards/{uid}";
     }
